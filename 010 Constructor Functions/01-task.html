@@ -15,26 +15,22 @@
         Выполните рефакторинг кода. Сделайте так, чтобы объекты создавались не через литералы, а через функцию конструктор.
         */
 
-        let user1 = {
-            firstName: "Ivan",
-            lastName: "Ivanov",
-            
-            show: function () {
-                console.log(this.firstName + " " + this.lastName);
-            }
+        function User(firstName, lastName) {
+            this.firstName = firstName;
+            this.lastName = lastName;
         }
 
-        let user2 = {
-            firstName: "Olga",
-            lastName: "Petrova",
-            
-            show: function () {
-                console.log(this.firstName + " " + this.lastName);
-            }
+        User.prototype.show = function (nodeElement) {
+            nodeElement.insertAdjacentHTML("beforebegin", `<p>${this.firstName} ${this.lastName}</p>`);
+            console.log(this.firstName + " " + this.lastName);
         }
 
-        user1.show();
-        user2.show();
+        let user1 = new User("Ivan", "Ivanov");
+        let user2 = new User("Olga", "Petrova");
+
+        const nodeElement = document.querySelector("script");
+        user1.show(nodeElement);
+        user2.show(nodeElement);
     </script>
 </body>
 
