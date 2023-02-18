@@ -15,22 +15,23 @@
         Выполните рефакторинг кода. Замените фабричный метод createUser на функцию конструктор.
         */
 
-        function createUser(login, email) {
-            return {
-                login: login,
-                email: email,
-
-                showContactInfo: function () {
-                    console.log("Мой логин " + this.login + ", мой email " + this.email);
-                }
-            }
+        function CreateUser(login, email) {
+            this.login = login;
+            this.email = email;
         }
 
-        let user1 = createUser("admin", "admin@example.com");
-        let user2 = createUser("user", "user@example.com");
+        CreateUser.prototype.showContactInfo = function (nodeElement) {
+            nodeElement.insertAdjacentHTML("beforebegin", `<p>Мой логин: ${this.login}, мой email: ${this.email}`);
+            console.log("Мой логин " + this.login + ", мой email " + this.email);
+        }
 
-        user1.showContactInfo();
-        user2.showContactInfo();
+        const user1 = new CreateUser("admin", "admin@example.com");
+        const user2 = new CreateUser("user", "user@example.com");
+
+        const nodeElement = document.querySelector("script");
+
+        user1.showContactInfo(nodeElement);
+        user2.showContactInfo(nodeElement);
     </script>
 </body>
 
